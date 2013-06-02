@@ -19,8 +19,8 @@ for iter = 1:num_iters
 	disp(theta);
 
 	a = (X*theta - y)/m;
-	theta_0 = theta(1,1) - alpha * a;
-	theta_1 = theta(2,1) - alpha * a .* X(:,2);
+	theta_0 = theta(1,1) - alpha * sum(a);
+	theta_1 = theta(2,1) - alpha * sum(a .* X(:,2));
 	theta = [theta_0;theta_1];
 
 
