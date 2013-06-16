@@ -20,20 +20,28 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-for i=1:size(idx)
-	m = sum((X(i,:) - centroids(1,:)) .^ 2);
-	index = 1;
-	for j=2:K
-		tmp = sum((X(i,:) - centroids(j,:)) .^ 2);
-		if tmp < m
-			m = tmp;
-			index = j;
-		end
-	end
-	idx(i) = index;
 
+% for i=1:size(idx)
+% 	m = sum((X(i,:) - centroids(1,:)) .^ 2);
+% 	index = 1;
+% 	for j=2:K
+% 		tmp = sum((X(i,:) - centroids(j,:)) .^ 2);
+% 		if tmp < m
+% 			m = tmp;
+% 			index = j;
+% 		end
+% 	end
+% 	idx(i) = index;
+
+% end
+
+[m, n] = size(centroids);
+for i = 1:size(idx)
+	row = repmat(X(i,:), m, 1);
+	tmp = sum((row - centroids) .^ 2, 2);
+	[row, col] = find(tmp == min(tmp));
+	idx(i) = row;
 end
-
 
 
 
